@@ -9,7 +9,7 @@ option = Options()
 option.add_experimental_option("prefs", {
     "profile.default_content_setting_values.notifications": 1
 })
-driver = webdriver.Chrome(options=option, executable_path='D:/학교/4-2/데사/크롤링/chromedriver.exe')
+driver = webdriver.Chrome(options=option, executable_path='./chromedriver.exe')
 
 #로딩
 url = 'https://data.kma.go.kr/data/typhoonData/typInfoTYList.do?pgmNo=689'
@@ -41,19 +41,17 @@ for y in year:
 
             print([e.text for e in driver.find_elements_by_xpath('//*[@id="wrap_content"]/div[4]/div[2]/div/table/tbody/tr[1]')][0])
             data.append([e.text for e in driver.find_elements_by_xpath('//*[@id="wrap_content"]/div[4]/div[2]/div/table/tbody/tr[1]')][0])
-#print([e.text for e in driver.find_element_by_xpath('//*[@id="typNameLst"]')])
-            #나눠서 저장.
+
 
 df = pd.DataFrame(columns = ['Time','latitude','longitude','CentalPressure','maxwindSpeed(m/s)','maxwindSpeed(km/h)',
                            'windRadius','strength','size','direction','speed'])
-#print(data[0])
+
 
 names = ((driver.find_element_by_xpath('//*[@id="typNameLst"]')).text).split('\n')
 p_names = []
 for n in names:
     p_names.append(n.lstrip())
 p_names.pop(0)
-#p_names.reverse()
 
 for line in data:
     etcData = line[21:]
@@ -70,8 +68,6 @@ df_x = pd.DataFrame()
 df_x['names'] = p_names
 
 
-#df = pd.concat([df_x,df],axis=1)
-#print(df)
 #저장
-df.to_csv('D:/학교/4-2/데사/크롤링/result.csv',encoding="utf-8-sig")
+df.to_csv('./result.csv',encoding="utf-8-sig")
 

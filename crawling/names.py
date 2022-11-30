@@ -9,7 +9,7 @@ option = Options()
 option.add_experimental_option("prefs", {
     "profile.default_content_setting_values.notifications": 1
 })
-driver = webdriver.Chrome(options=option, executable_path='D:/학교/4-2/데사/크롤링/chromedriver.exe')
+driver = webdriver.Chrome(options=option, executable_path='./chromedriver.exe')
 
 #로딩
 url = 'https://data.kma.go.kr/data/typhoonData/typInfoTYList.do?pgmNo=689'
@@ -44,4 +44,4 @@ for y in year:
         count = 1
 print(df_x)
 
-df_x.to_csv('D:/학교/4-2/데사/크롤링/names.csv',encoding="utf-8-sig")
+df_x.to_csv('./typoon_names.csv',encoding="utf-8-sig")
